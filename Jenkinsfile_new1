@@ -3,7 +3,15 @@ agent any
 stages {
     stage ('scm checkout')
     {steps {git branch : 'master',  url: 'https://github.com/ravi7sharma/maven-project'}}
-
+    
+    stage ('execute unit test framework')
+    steps{withMaven(globalMavenSettingsConfig: '--- Use system default settings or file path ---', jdk: 'Java_Home', maven: 'Maven_Home', mavenSettingsConfig: '--- Use system default settings or file path ---') {
+    {sh 'mvn test'}
+}}
 
 }
+}
+
+// withMaven(globalMavenSettingsConfig: '--- Use system default settings or file path ---', jdk: 'Java_Home', maven: 'Maven_Home', mavenSettingsConfig: '--- Use system default settings or file path ---') {
+    {sh 'mvn test'}
 }
