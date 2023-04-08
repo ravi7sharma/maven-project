@@ -6,8 +6,8 @@ stages {
     
     stage ('execute unit test framework')
     { steps{withMaven(globalMavenSettingsConfig: '--- Use system default settings or file path ---', jdk: 'Java_Home', maven: 'Maven_Home', mavenSettingsConfig: '--- Use system default settings or file path ---') {
-    {sh 'mvn test'}}
-}}
+    {sh 'mvn test'}
+}}}
 
 }
 }
