@@ -9,10 +9,17 @@ stages {
 {sh 'mvn test'}
 }}
 
-stage ('create deployable package')
+    stage ('create deployable package')
     {steps {withMaven(globalMavenSettingsConfig: 'bf2c6358-49b1-483d-af6b-85261b7df14d', jdk: 'Java_Home', maven: 'Maven_Home', mavenSettingsConfig: 'b20b414f-0720-442b-a4eb-133f00cc378f') 
 {sh 'mvn clean package'}
 }}
 
+    stage ('deploy-to-dev')
+    {steps {sshagent(['592588e4-02af-444f-830b-fa2269e2bd93']) 
+{ sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@54.93.166.95:/var/lib/tomcat/webapps'}}}
 }
 }
+
+
+// sshagent(['592588e4-02af-444f-830b-fa2269e2bd93']) 
+{ sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@54.93.166.95:/var/lib/tomcat/webapps'}
