@@ -14,8 +14,21 @@ stages {
 {sh 'mvn clean package'}
 }}
 
+    stage ('deploy to multiple VM')
+    {parallel}
+    
+    stage ('deploy-to-dev-vm1')
+    {steps {sh 'echo deploy to vm1'}}
+    
+     stage ('deploy-to-dev-vm2')
+    {steps {sh 'echo deploy to vm2'}}
+    
+     stage ('deploy-to-dev-vm2')
+    {steps {sh 'echo deploy to vm2'}}
+    
     stage ('deploy-to-dev')
     {steps {sshagent(['592588e4-02af-444f-830b-fa2269e2bd93']) 
 { sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@54.93.166.95:/var/lib/tomcat/webapps'}}}
 }
 }
+1]5
