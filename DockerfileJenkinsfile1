@@ -7,10 +7,10 @@ stages {
     stage ('code build')
     {steps {withMaven(globalMavenSettingsConfig: 'bf2c6358-49b1-483d-af6b-85261b7df14d', jdk: 'Java_Home', maven: 'Maven_Home', mavenSettingsConfig: 'b20b414f-0720-442b-a4eb-133f00cc378f') {
     {sh 'mvn clean package'}
-
+}}
     stage {'docker build or create image'}
     {steps {sh 'docker build -t ravi7sharma/mavenwebapp:01 .'}}
-}}
+
 
 }
 }
